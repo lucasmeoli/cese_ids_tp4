@@ -23,7 +23,7 @@ SPDX-License-Identifier: MIT
 #define MAIN_H
 
 /** @file main.h
- ** @brief Declarations for the main program function.
+ ** @brief Declaration for the main program function.
  **/
 
 /* === Headers files inclusions ================================================================ */

@@ -12,11 +12,11 @@ OBJ_FILES = $(patsubst $(SRC_DIR)/%.c, $(OBJ_DIR)/%.o, $(SRC_FILES))
 -include $(patsubst %.o,%.d,$(OBJ_FILES))
 
 all: $(OBJ_FILES)
-	@echo Enlazando $@
+	@echo Linking $@
 	@gcc $(OBJ_FILES) -o $(OUT_DIR)/app.elf
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
-	@echo Compilando $@
+	@echo Compiling $@
 	@mkdir -p $(OBJ_DIR)
 	@gcc -o $@ -c $< -I $(INC_DIR) -MMD
 

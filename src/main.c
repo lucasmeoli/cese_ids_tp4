@@ -30,8 +30,11 @@ SPDX-License-Identifier: MIT
 
 /* === Macros definitions ====================================================================== */
 
-#define LED_RED_PORT 1
-#define LED_RED_BIT  7
+#define LED_RED_PORT        1
+#define LED_RED_BIT         7
+
+#define BUTTON_LED_RED_PORT 2
+#define BUTTON_LED_RED_PIN  5
 
 /* === Private data type declarations ========================================================== */
 
@@ -49,9 +52,18 @@ SPDX-License-Identifier: MIT
 
 int main(void) {
     gpio_t led_red = gpioCreate(LED_RED_PORT, LED_RED_BIT);
+    gpio_t button_led_red = gpioCreate(BUTTON_LED_RED_PORT, BUTTON_LED_RED_PIN);
 
     gpioSetOutput(led_red, true);
-    gpioSetState(led_red, false);
+    gpioSetOutput(button_led_red, false);
+
+    while (true) {
+        if (gpioGetState(button_led_red)) {
+            gpioSetState(led_red, true);
+        } else {
+            gpioSetState(led_red, false);
+        }
+    }
 }
 
 /* === End of documentation ==================================================================== */
