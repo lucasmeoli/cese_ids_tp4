@@ -19,14 +19,17 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 SPDX-License-Identifier: MIT
 *************************************************************************************************/
 
-#ifndef MAIN_H
-#define MAIN_H
+#ifndef HAL_H
+#define HAL_H
 
-/** @file main.h
- ** @brief Declarations for the main program function.
+/** @file hal.h
+ ** @brief Declaration of HAL functions.
  **/
 
 /* === Headers files inclusions ================================================================ */
+
+#include <stdint.h>
+#include <stdbool.h>
 
 /* === C++ Header ============================================================================== */
 
@@ -43,11 +46,37 @@ extern "C" {
 /* === Public function declarations ============================================================ */
 
 /**
- * @brief Main function of the system, executed at program startup.
+ * @brief Sets the direction of a GPIO pin.
  *
- * @return int Return value, zero if everything is fine, negative if there is an error.
+ * Configures the specified GPIO pin as either input or output.
+ *
+ * @param port The GPIO port number.
+ * @param bit The GPIO pin bit.
+ * @param output `true` to set the pin as output, `false` to set it as input.
  */
-int main(void);
+void hal_gpio_set_direction(uint8_t port, uint8_t bit, bool output);
+
+/**
+ * @brief Sets the state of a GPIO pin.
+ *
+ * Sets the specified GPIO pin to either high or low state.
+ *
+ * @param port The GPIO port number.
+ * @param bit The GPIO pin bit.
+ * @param state `true` to set the pin high, `false` to set it low.
+ */
+void hal_gpio_set_state(uint8_t port, uint8_t bit, bool state);
+
+/**
+ * @brief Reads the state of a GPIO pin.
+ *
+ * Returns the current state (high or low) of the specified GPIO pin.
+ *
+ * @param port The GPIO port number.
+ * @param bit The GPIO pin bit.
+ * @return `true` if the pin is high, `false` if it is low.
+ */
+bool hal_gpio_get_state(uint8_t port, uint8_t bit);
 
 /* === End of documentation ==================================================================== */
 
@@ -55,4 +84,4 @@ int main(void);
 }
 #endif
 
-#endif /* MAIN_H */
+#endif /* HAL_H */
